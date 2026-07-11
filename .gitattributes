@@ -1,0 +1,6 @@
+*.pbix binary
+*.png binary
+*.csv text eol=lf
+*.dax text eol=lf
+*.md text eol=lf
+*.py text eol=lf

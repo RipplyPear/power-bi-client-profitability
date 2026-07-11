@@ -1,0 +1,66 @@
+Total Customers =
+DISTINCTCOUNT (Fact_ClientMonthly[client_id])
+
+
+Average Monthly Profitability =
+AVERAGE (Fact_ClientMonthly[monthly_profitability])
+
+
+Customers Above Average Profitability =
+VAR PortfolioAverage =
+	CALCULATE (
+		[Average Monthly Profitability],
+		REMOVEFILTERS (Dim_Client)
+	)
+VAR CustomerProfitability =
+	ADDCOLUMNS (
+		VALUES (Fact_ClientMonthly[client_id]),
+		"CustomerAverage",
+		CALCULATE ([Average Monthly Profitability])
+	)
+RETURN
+	COUNTROWS (
+		FILTER (
+			CustomerProfitability,
+			[CustomerAverage] > PortfolioAverage
+		)
+	)
+
+
+Digitally Active Customers =
+CALCULATE (
+	[Total Customers],
+	Fact_ClientMonthly[digitally_active_flag] = "Y"
+)
+
+
+Digital Adoption Rate =
+DIVIDE ([Digitally Active Customers], [Total Customers])
+
+
+Average Monthly Digital Adoption Rate =
+AVERAGEX (
+	VALUES (Dim_Date[reference_date]),
+	DIVIDE ([Digitally Active Customers], [Total Customers])
+)
+
+
+Total Transactions =
+SUM (Fact_ClientMonthly[transaction_count])
+
+
+Total Transaction Volume =
+SUM (Fact_ClientMonthly[transaction_volume])
+
+
+Average Products per Customer =
+AVERAGE (Fact_ClientMonthly[product_count])
+
+
+Selected Age Segment Title =
+"Age Segment Details | "
+& SELECTEDVALUE (
+	Dim_Client[age_bucket],
+	"All age groups"
+)
+
