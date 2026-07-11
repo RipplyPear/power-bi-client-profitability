@@ -2,6 +2,8 @@
 
 An interactive Power BI portfolio project for exploring customer profitability, transactional activity, digital adoption, and demographic segments in a fictional retail bank.
 
+[Download the latest Power BI report](https://github.com/RipplyPear/power-bi-client-profitability/releases/latest/download/Customer-Profitability-Synthetic.pbix)
+
 ![Dashboard overview](images/dashboard-overview.png)
 
 > **Data and affiliation notice:** This public portfolio version uses an independently generated, fully synthetic dataset. It contains no real customer records, confidential information, or original company data. The underlying team assignment was completed during a short BCR internship program; this repository is an educational portfolio project and is not an official BCR product. BCR did not sponsor or endorse this public repository.
